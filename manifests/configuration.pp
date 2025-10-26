@@ -18,5 +18,9 @@ class rspamd::configuration {
     }
   }
 
-  rspamd::create_config_file_resources($rspamd::config)
+  $rspamd::config.each |$module, $config| {
+    rspamd::config { $module:
+      value => $config,
+    }
+  }
 }
